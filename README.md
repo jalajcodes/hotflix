@@ -1,6 +1,6 @@
 # 🎬 Hotflix
 
-Movie tracker built using React, Styled Components, and TMDB api.
+Movie tracker built using React, Styled Components, and TMDB api. https://hotflix.web.app
 
 ## ✨ Features
 
