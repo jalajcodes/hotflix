@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   POPULAR_BASE_URL,
   SEARCH_BASE_URL,
@@ -13,12 +13,14 @@ import Grid from '../components/Grid';
 import MovieThumb from '../components/MovieThumb';
 import LoadMoreBtn from '../components/LoadMoreBtn';
 import Spinner from '../components/Spinner';
+import GenreSelector from '../components/GenreSelector';
 
 import { useHomeFetch } from '../hooks/useHomeFetch';
 
 import NoImage from '../assets/no_image.jpg';
 
 const Home = () => {
+  const [selectedGenre, setSelectedGenre] = useState({ value: POPULAR_BASE_URL, label: 'Popular' });
   const [searchTerm, setSearchTerm] = useState('');
   const [
     {
@@ -29,18 +31,25 @@ const Home = () => {
     fetchMovies,
   ] = useHomeFetch(searchTerm);
 
-  const searchMovies = (search) => {
-    const endpoint = search ? SEARCH_BASE_URL + search : POPULAR_BASE_URL;
+  useEffect(() => {
+    fetchMovies(selectedGenre.value);
+  }, [selectedGenre.value]);
 
-    setSearchTerm(search);
+  const searchMovies = (search) => {
+    const searchTerm = search.trim(); // we don't want blank spaces
+
+    setSearchTerm(searchTerm);
+
+    // this removes searchResults (refetches the previously selected genre) when search is empty.
+    const endpoint = searchTerm.length > 0 ? SEARCH_BASE_URL + searchTerm : selectedGenre.value;
     fetchMovies(endpoint);
   };
 
   const loadMoreMovies = () => {
     const searchEndpoint = `${SEARCH_BASE_URL}${searchTerm}&page=${currentPage + 1}`;
-    const popularEndpoint = `${POPULAR_BASE_URL}&page=${currentPage + 1}`;
+    const movieEndpoint = `${selectedGenre.value}&page=${currentPage + 1}`;
 
-    const endpoint = searchTerm ? searchEndpoint : popularEndpoint;
+    const endpoint = searchTerm ? searchEndpoint : movieEndpoint;
 
     fetchMovies(endpoint);
   };
@@ -58,7 +67,12 @@ const Home = () => {
         />
       )}
       <SearchBar callback={searchMovies} />
-      <Grid header={searchTerm ? 'Search Result' : 'Popular Movies'}>
+      <GenreSelector
+        isSearching={!!searchTerm}
+        selectedGenre={selectedGenre}
+        setSelectedGenre={setSelectedGenre}
+      />
+      <Grid>
         {movies.map((movie) => (
           <MovieThumb
             key={movie.id}

@@ -14,6 +14,12 @@ export const StyledGrid = styled.div`
   }
 `;
 
+export const StyledGridHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
 export const StyledGridContent = styled.div`
   display: grid;
   grid-template-columns: repeat(5, minmax(100px, 1fr));
