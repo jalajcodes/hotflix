@@ -10,3 +10,5 @@ Movie tracker built using React, Styled Components, and TMDB api. https://hotfli
  - Search Movies
  - Load more search results
  - Movie statistics (revenue, cast, running time etc...)
+ - Caching of movies on Homepage for current session
+ - Long Time caching of movie details.
