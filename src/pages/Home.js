@@ -33,6 +33,7 @@ const Home = () => {
 
   useEffect(() => {
     fetchMovies(selectedGenre.value);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedGenre.value]);
 
   const searchMovies = (search) => {
