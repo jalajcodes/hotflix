@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Home from './pages/Home';
 import Movie from './pages/Movie';
+import Favourites from './pages/Favourites';
 import NotFound from './pages/NotFound';
 
 import { GlobalStyle } from './styles/GlobalStyle';
@@ -15,6 +16,9 @@ const App = () => (
       <Switch>
         <Route exact path="/">
           <Home />
+        </Route>
+        <Route exact path="/favourites">
+          <Favourites />
         </Route>
         <Route exact path="/:movieId">
           <Movie />

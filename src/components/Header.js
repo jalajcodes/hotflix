@@ -10,6 +10,10 @@ const Header = () => (
       <Link to="/">
         <FontAwesome className="fa-film" name="film" /> Hotflix
       </Link>
+
+      <Link to="/favourites" className="normal">
+        Favourites
+      </Link>
     </div>
   </StyledHeader>
 );

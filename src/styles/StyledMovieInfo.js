@@ -70,12 +70,15 @@ export const StyledMovieInfo = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 35px;
+    width: fit-content;
+    padding: 10px;
+    border-radius: 8px;
     height: 35px;
     background: #fff;
     color: #000;
     font-weight: 800;
-    border-radius: 25px;
+    /* border-radius: 25px; */
+    padding: 8px;
     margin: 0px 0 0 0;
   }
 

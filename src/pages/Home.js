@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import useLocalStorageState from 'use-local-storage-state';
+
 import {
   POPULAR_BASE_URL,
   SEARCH_BASE_URL,
@@ -22,6 +24,10 @@ import NoImage from '../assets/no_image.jpg';
 const Home = () => {
   const [selectedGenre, setSelectedGenre] = useState({ value: POPULAR_BASE_URL, label: 'Popular' });
   const [searchTerm, setSearchTerm] = useState('');
+  const [favMovies, setFavMovies] = useLocalStorageState('favourites', {
+    defaultValue: [],
+  });
+
   const [
     {
       state: { movies, currentPage, totalPages, heroImage },
@@ -55,6 +61,24 @@ const Home = () => {
     fetchMovies(endpoint);
   };
 
+  const handleStarClick = (e, movieId, image) => {
+    e.preventDefault();
+
+    const movieIndex = favMovies.findIndex((movie) => Number(movie.movieId) === Number(movieId));
+
+    if (movieIndex === -1) {
+      setFavMovies([
+        ...favMovies,
+        {
+          movieId,
+          image,
+        },
+      ]);
+    } else {
+      setFavMovies(favMovies.filter((movie) => Number(movie.movieId) !== Number(movieId)));
+    }
+  };
+
   if (error) return <div>Something went wrong ...</div>;
   if (!movies[0]) return <Spinner />;
 
@@ -81,6 +105,8 @@ const Home = () => {
             image={movie.poster_path ? IMAGE_BASE_URL + POSTER_SIZE + movie.poster_path : NoImage}
             movieId={movie.id}
             movieName={movie.original_title}
+            favMovies={favMovies}
+            handleStarClick={handleStarClick}
           />
         ))}
       </Grid>

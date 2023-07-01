@@ -28,6 +28,14 @@ export const StyledHeader = styled.div`
       min-height: 0px;
     }
   }
+
+  a.normal {
+    font-size: 1.2rem;
+
+    :hover {
+      color: yellow;
+    }
+  }
 `;
 
 export const StyledTMDBLogo = styled.img`
