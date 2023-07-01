@@ -7,6 +7,7 @@ export const StyledGenreSelector = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  font-size: 'Abel', sans-serif;
 
   h1 {
     font-family: 'Abel', sans-serif;
@@ -15,6 +16,10 @@ export const StyledGenreSelector = styled.div`
     @media screen and (max-width: 768px) {
       font-size: 22px;
     }
+  }
+
+  .genre-selector {
+    font-family: 'Abel', sans-serif;
   }
 `;
 

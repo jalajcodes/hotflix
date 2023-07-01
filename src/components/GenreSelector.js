@@ -36,7 +36,12 @@ const GenreSelector = ({ isSearching, selectedGenre, setSelectedGenre }) => {
       <h1>{isSearching ? 'Search Results' : `${selectedGenre.label} Movies`}</h1>
       {!isSearching && (
         <StyledSelector>
-          <Select options={options} defaultValue={selectedGenre} onChange={handleChange} />
+          <Select
+            options={options}
+            defaultValue={selectedGenre}
+            onChange={handleChange}
+            className="genre-selector"
+          />
         </StyledSelector>
       )}
     </StyledGenreSelector>
