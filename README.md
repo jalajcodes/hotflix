@@ -12,4 +12,4 @@ Movie tracker built using React, Styled Components, and TMDB api. https://hotfli
 - Movie statistics (revenue, cast, running time etc...)
 - Caching of movies on Homepage for current session
 - Long Time caching of movie details.
-- Star a movie and see it later in favourites
+- Star a movie and see it later in favourite
